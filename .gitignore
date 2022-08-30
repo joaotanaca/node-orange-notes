@@ -1,0 +1,4 @@
+node_modules
+database.sqlite
+swagger_output.json
+.tool-versions
