@@ -1,24 +1,25 @@
-import { Express, Request } from "express";
 import bcrypt from "bcrypt";
-import { AppDataSource } from "./src/config/database";
-import { User } from "./src/models/User";
-import validateUser from "./src/middlewares/validateUser";
+import { Request as RequestExpress, Response } from "express";
+import { AppDataSource } from "@config/database";
+import { User } from "@models/User";
 
-export const UserRepository = AppDataSource.getRepository(User);
-
-export type RequestUser = Request<
+type Request = RequestExpress<
     { id: string },
     any,
     { name: string; email: string; password: string }
 >;
 
-export default (app: Express) => {
-    app.get("/users", async (_req, res) => {
+const UserRepository = AppDataSource.getRepository(User);
+
+export default class UserController {
+    // Get all users from the database
+    async getUsers(_req: Request, res: Response) {
         const users = await UserRepository.find();
         res.status(200).json(users);
-    });
+    }
 
-    app.post("/user", validateUser, async (req: RequestUser, res) => {
+    // Create user in database
+    async postUser(req: Request, res: Response) {
         const { name, email, password } = req.body;
 
         try {
@@ -34,9 +35,10 @@ export default (app: Express) => {
         } catch (err) {
             res.sendStatus(400);
         }
-    });
+    }
 
-    app.put("/user/:id", async (req: RequestUser, res) => {
+    // Update user in database
+    async putUser(req: Request, res: Response) {
         const { id } = req.params;
         const { name, email, password } = req.body;
         const salt = await bcrypt.genSalt(10);
@@ -46,14 +48,14 @@ export default (app: Express) => {
             email,
             password: passwordHash,
         });
-
         res.status(200).json(user);
-    });
+    }
 
-    app.delete("/user/:id", async (req: RequestUser, res) => {
+    //Delete a user from the database
+    async deleteUser(req: Request, res: Response) {
         const { id } = req.params;
         const user = await UserRepository.delete(id);
 
         res.status(200).json(user);
-    });
-};
+    }
+}
