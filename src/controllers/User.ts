@@ -9,7 +9,7 @@ type Request = RequestExpress<
     { name: string; email: string; password: string }
 >;
 
-const UserRepository = AppDataSource.getRepository(User);
+export const UserRepository = AppDataSource.getRepository(User);
 
 export default class UserController {
     // Get all users from the database

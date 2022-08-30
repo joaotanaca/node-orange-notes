@@ -1,8 +1,8 @@
-import { NextFunction, Response } from "express";
-import { RequestUser, UserRepository } from "../../endpoints";
+import { Request, NextFunction, Response } from "express";
+import { UserRepository } from "@controllers/User";
 
 export default async function (
-    req: RequestUser,
+    req: Request,
     res: Response,
     next: NextFunction,
 ) {

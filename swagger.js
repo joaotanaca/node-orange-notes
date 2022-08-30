@@ -11,6 +11,5 @@ swaggerAutogen(outputFile, endpointsFiles, {
         //     authorizationUrl: "https://petstore.swagger.io/oauth/authorize",
         //     flow: "implicit",
         // },
-        
     },
 });
