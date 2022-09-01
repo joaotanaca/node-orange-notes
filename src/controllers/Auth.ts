@@ -1,21 +1,30 @@
 import bcrypt from "bcrypt";
-import { Request as RequestExpress, Response } from "express";
+import jwt from "jsonwebtoken";
+import { Response } from "express";
 import { AppDataSource } from "@config/database";
 import { User } from "@models/User";
-
-export type Request = RequestExpress<
-    { id: string },
-    any,
-    { name: string; email: string; password: string }
->;
+import { Request } from "./User";
 
 export const UserRepository = AppDataSource.getRepository(User);
 
-export default class UserController {
-    // Get all users from the database
-    async getUsers(_req: Request, res: Response) {
-        const users = await UserRepository.find();
-        res.status(200).json(users);
+export default class AuthController {
+    // Verify email is exist in the database and check password
+    async login(req: Request, res: Response) {
+        const { email } = req.body;
+        try {
+            const user = await UserRepository.findOne({
+                where: { email },
+                select: { email: true, name: true, id: true },
+            });
+
+            const token = jwt.sign({ user }, "test", {
+                expiresIn: 15 * 60,
+            });
+
+            return res.status(200).json(token);
+        } catch (err) {
+            return res.status(400).json({ error: err });
+        }
     }
 
     // Create user in database
@@ -35,20 +44,6 @@ export default class UserController {
         } catch (err) {
             res.sendStatus(400);
         }
-    }
-
-    // Update user in database
-    async putUser(req: Request, res: Response) {
-        const { id } = req.params;
-        const { name, email, password } = req.body;
-        const salt = await bcrypt.genSalt(10);
-        const passwordHash = await bcrypt.hash(password, salt);
-        const user = await UserRepository.update(id, {
-            name,
-            email,
-            password: passwordHash,
-        });
-        res.status(200).json(user);
     }
 
     //Delete a user from the database

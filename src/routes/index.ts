@@ -2,6 +2,7 @@ import authorization from "@middlewares/authorization";
 import { serve, setup } from "swagger-ui-express";
 import { Express } from "express";
 import User from "./Users";
+import Auth from "./Auth";
 import swaggerDocument from "../config/swagger_output.json";
 
 export default class Routes {
@@ -12,8 +13,8 @@ export default class Routes {
 
     initialize() {
         this.app.use(authorization);
-        this.app.get("/", (_req, res) => res.send("Hello World!"));
-        this.app.use("/api-docs", serve, setup(swaggerDocument));
+        this.app.use("/docs", serve, setup(swaggerDocument));
         this.app.use("/user", User);
+        this.app.use("/auth", Auth);
     }
 }
