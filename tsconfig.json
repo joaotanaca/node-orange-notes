@@ -29,19 +29,19 @@
         "module": "CommonJS",
         // "rootDir": "./",                                  /* Specify the root folder within your source files. */
         "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
-        "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+        "baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
         "paths": {
-            "@config/*": ["./src/config/*"],
-            "@controllers/*": ["./src/controllers/*"],
-            "@middlewares/*": ["./src/middlewares/*"],
-            "@models/*": ["./src/models/*"],
-            "@models": ["./src/models/index.ts"],
-            "@routes/*": ["./src/routes/*"]
+            "@config/*": ["./config/*"],
+            "@controllers/*": ["./controllers/*"],
+            "@middlewares/*": ["./middlewares/*"],
+            "@models/*": ["./models/*"],
+            "@models": ["./models/index.ts"],
+            "@routes/*": ["./routes/*"]
         } /* Specify a set of entries that re-map imports to additional lookup locations. */,
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         "typeRoots": [
             "./node_modules/@types",
-            "./src/types"
+            "types"
         ] /* Specify multiple folders that act like './node_modules/@types'. */,
         // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
         // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */

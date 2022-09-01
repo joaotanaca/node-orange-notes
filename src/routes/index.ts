@@ -2,7 +2,7 @@ import authorization from "@middlewares/authorization";
 import { serve, setup } from "swagger-ui-express";
 import { Express } from "express";
 import User from "./Users";
-import swaggerDocument from "swagger_output.json";
+import swaggerDocument from "../config/swagger_output.json";
 
 export default class Routes {
     private app: Express;

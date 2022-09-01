@@ -1,8 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import helmet from "helmet";
-import { AppDataSource } from "./src/config/database";
-import Routes from "./src/routes";
+import { AppDataSource } from "./config/database";
+import Routes from "./routes";
 
 AppDataSource.initialize()
     .then()
@@ -10,7 +10,7 @@ AppDataSource.initialize()
         console.log(err);
     });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());

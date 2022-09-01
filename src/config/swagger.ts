@@ -1,10 +1,10 @@
 const swaggerAutogen = require("swagger-autogen")();
 
-const outputFile = "./swagger_output.json";
+const outputFile = "./src/config/swagger_output.json";
 const endpointsFiles = ["./src/routes/index.ts"];
 
 swaggerAutogen(outputFile, endpointsFiles, {
-    host: "localhost:8080",
+    host: "localhost:3000",
     securityDefinitions: {
         // petstore_auth: {
         //     type: "oauth2",
