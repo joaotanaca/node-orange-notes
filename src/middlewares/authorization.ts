@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 
 export default (req: Request, res: Response, next: NextFunction) => {
-    const { Authorization } = req.headers;
-    if (!Authorization) {
+    const { authorization } = req.headers;
+
+    if (authorization === "tanaca" || req.path.match(/api-docs/g)?.length) {
         next();
     } else {
         return res.sendStatus(401);

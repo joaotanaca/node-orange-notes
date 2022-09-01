@@ -1,6 +1,6 @@
 {
     "watch": ["./"],
     "ext": "ts,json",
-    "ignore": ["src/**/*.spec.ts", "node_modules"],
-    "exec": "ts-node -r tsconfig-paths/register --transpileOnly ./src/index.ts"
+    "ignore": ["src/**/*.spec.ts", "node_modules","src/config/swagger_output.json"],
+    "exec": "yarn swagger-autogen ; ts-node -r tsconfig-paths/register --transpileOnly ./src/index.ts"
 }
