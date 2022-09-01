@@ -3,7 +3,10 @@ export {};
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
-            TEST: string;
+            PORT: string;
+            DB_HOST: string;
+            DB_PASSWORD: string;
+            SWAGGER_URL: string;
         }
     }
 }

@@ -6,10 +6,10 @@ export const AppDataSource = new DataSource({
     type: "postgres",
     database: "orange-notes",
     name: "default",
-    host: "localhost",
+    host: process.env.DB_HOST,
     port: 5432,
     username: "postgres",
-    password: "123",
+    password: process.env.DB_PASSWORD,
     synchronize: true,
     entities: models,
 });

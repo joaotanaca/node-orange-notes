@@ -10,6 +10,7 @@ processes = []
 
 [env]
   PORT = "8080"
+  SWAGGER_URL = "node-orange-notes.fly.dev"
 
 [experimental]
   allowed_public_ports = []
