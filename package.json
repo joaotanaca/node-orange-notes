@@ -7,9 +7,8 @@
         "email": "jtanacar@gmail.com"
     },
     "scripts": {
-        "dev": "npm run swagger-autogen ; nodemon",
-        "pre-start": "yarn swagger-autogen ; touch ./src/config/database.sqlite",
-        "start": "yarn pre-start ; ts-node -r tsconfig-paths/register --transpileOnly ./src/index.ts",
+        "dev": "yarn swagger-autogen ; nodemon",
+        "ts-node": "yarn swagger-autogen ; ts-node -r tsconfig-paths/register --transpileOnly ./src/index.ts",
         "build": "babel src --extensions \".js,.ts\" --ignore \"src/types/*.d.ts\" --out-dir dist --copy-files",
         "swagger-autogen": "ts-node ./src/config/swagger.ts"
     },
@@ -19,6 +18,7 @@
         "express": "^4.18.1",
         "helmet": "^6.0.0",
         "jsonwebtoken": "^8.5.1",
+        "pg": "^8.8.0",
         "reflect-metadata": "^0.1.13",
         "sqlite3": "^5.0.11",
         "typeorm": "^0.3.9",
