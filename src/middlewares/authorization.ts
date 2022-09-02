@@ -10,7 +10,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
             return next();
 
             // Routes with authorization of api_key
-        } else if (req.path.match(/login/g)?.length && api_key) {
+        } else if (req.path.match(/login|signup/g)?.length && api_key) {
             return next();
         } else if (!authorization || !api_key) {
             throw new Error();
