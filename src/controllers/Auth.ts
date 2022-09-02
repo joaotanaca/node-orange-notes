@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Response } from "express";
 import { AppDataSource } from "@config/database";

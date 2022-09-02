@@ -7,7 +7,8 @@ const Router = express.Router();
 class User {
     constructor() {
         const user = new UserController();
-        Router.get("/", user.getUsers);
+        Router.get("s/", user.getUsers);
+        Router.get("/", user.getUser);
         Router.post("/", validateUser, user.postUser);
         Router.put("/:id", user.putUser);
         Router.delete("/:id", user.deleteUser);

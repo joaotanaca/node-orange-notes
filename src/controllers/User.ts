@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { Request as RequestExpress, Response } from "express";
 import { AppDataSource } from "@config/database";
 import { User } from "@models/User";
@@ -16,6 +17,22 @@ export default class UserController {
     async getUsers(_req: Request, res: Response) {
         const users = await UserRepository.find();
         res.status(200).json(users);
+    }
+
+    // Get user from the database
+    async getUser(req: Request, res: Response) {
+        const { authorization } = req.headers;
+        const token = jwt.decode(authorization as string, {
+            json: true,
+        }) as { user: User };
+        console.log(token);
+
+        const user = await UserRepository.findOne({
+            where: { id: token.user.id },
+            select: { email: true, name: true, id: true },
+        });
+
+        res.status(200).json(user);
     }
 
     // Create user in database

@@ -20,18 +20,18 @@ export default async function (
             cache: 10 * 1000,
         });
 
-        const passwordValidation = await bcrypt.compare(
+        const passwordValidation = bcrypt.compareSync(
             password,
             user?.password as string,
         );
 
-        // Validate the password
+        // Validate the password and user
         if (!passwordValidation || !user) {
             throw new Error();
         }
 
         next();
-    } catch (err) {
+    } catch (err: any) {
         // Send the error message
         return res.status(400).json({ message: "Email ou senha invalida" });
     }
