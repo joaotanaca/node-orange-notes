@@ -25,7 +25,6 @@ export default class UserController {
         const token = jwt.decode(authorization as string, {
             json: true,
         }) as { user: User };
-        console.log(token);
 
         const user = await UserRepository.findOne({
             where: { id: token.user.id },
