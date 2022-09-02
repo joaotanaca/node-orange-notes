@@ -17,9 +17,13 @@ export default class AuthController {
                 select: { email: true, name: true, id: true },
             });
 
-            const token = jwt.sign({ user }, "test", {
-                expiresIn: 15 * 60,
-            });
+            const token = jwt.sign(
+                { user },
+                process?.env?.JWT_SECRET as string,
+                {
+                    expiresIn: 15 * 60, //Convert seconds to minutes,
+                },
+            );
 
             return res.status(200).json(token);
         } catch (err) {
