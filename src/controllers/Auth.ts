@@ -31,25 +31,6 @@ export default class AuthController {
         }
     }
 
-    // Create user in database
-    async postUser(req: Request, res: Response) {
-        const { name, email, password } = req.body;
-
-        try {
-            const salt = await bcrypt.genSalt(10);
-            const passwordHash = await bcrypt.hash(password, salt);
-            await UserRepository.save({
-                name,
-                email,
-                password: passwordHash,
-            });
-
-            res.sendStatus(202);
-        } catch (err) {
-            res.sendStatus(400);
-        }
-    }
-
     //Delete a user from the database
     async deleteUser(req: Request, res: Response) {
         const { id } = req.params;
