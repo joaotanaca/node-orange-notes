@@ -3,7 +3,7 @@ import { Response } from "express";
 import { AppDataSource } from "@config/database";
 import { User } from "@models/User";
 import { Request } from "./User";
-import jwtEncode from "helpers/jwtEncode";
+import jwtEncode from "../helpers/jwtEncode";
 
 export const UserRepository = AppDataSource.getRepository(User);
 
