@@ -3,27 +3,31 @@ import {
     Column,
     CreateDateColumn,
     PrimaryGeneratedColumn,
-    OneToMany,
+    ManyToOne,
+    UpdateDateColumn,
 } from "typeorm";
 import { Task } from "./Task";
 
-@Entity("users")
-export class User {
+@Entity("subtasks")
+export class Subtask {
     @PrimaryGeneratedColumn("uuid")
     readonly id?: string;
 
     @Column()
-    name!: string;
+    title!: string;
 
     @Column()
-    email!: string;
-
-    @Column()
-    password!: string;
+    checked!: boolean;
 
     @CreateDateColumn()
     created_at!: Date;
 
-    @OneToMany(() => Task, (task) => task.user)
-    tasks!: Task[];
+    @UpdateDateColumn()
+    update_at!: Date;
+
+    @ManyToOne(() => Task, (task) => task.subtasks)
+    task!: Task;
+
+    @Column()
+    taskId!: string;
 }
