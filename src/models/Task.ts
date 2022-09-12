@@ -3,10 +3,10 @@ import {
     Column,
     CreateDateColumn,
     PrimaryGeneratedColumn,
-    OneToOne,
     JoinColumn,
     OneToMany,
     UpdateDateColumn,
+    ManyToOne,
 } from "typeorm";
 import { Subtask } from "./Subtasks";
 import { User } from "./User";
@@ -31,13 +31,13 @@ export class Task {
     @UpdateDateColumn()
     update_at!: Date;
 
-    @OneToOne((type) => User)
+    @ManyToOne((type) => User)
     @JoinColumn()
     user!: User;
 
     @Column()
     userId!: string;
 
-    @OneToMany(() => Subtask, (subtasks) => subtasks.task)
+    @OneToMany(() => Subtask, (subtasks) => subtasks.task, { cascade: true })
     subtasks!: Subtask[];
 }

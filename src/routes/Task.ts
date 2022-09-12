@@ -6,8 +6,8 @@ const Router = express.Router();
 class Task {
     constructor() {
         const task = new TaskController();
-        Router.get("s/", task.getTasks);
-        Router.get("/", task.getTask);
+        Router.get("/", task.getTasks);
+        Router.get("/:id", task.getTask);
         Router.post("/", task.postTasks);
         Router.put("/:id", task.putTasks);
         Router.delete("/:id", task.deleteTasks);
