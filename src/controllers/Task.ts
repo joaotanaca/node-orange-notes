@@ -2,7 +2,7 @@ import { Request as RequestExpress, Response } from "express";
 import jwt from "jsonwebtoken";
 import { AppDataSource } from "@config/database";
 import { Task } from "@models/Task";
-import calcPercentage from "helpers/calcPercentage";
+import calcPercentage from "../helpers/calcPercentage";
 
 export type Request = RequestExpress<{ id: string }, any, Task>;
 
@@ -50,7 +50,7 @@ export default class TaskController {
         const { title, subtitle, description, subtasks, userId } = req.body;
 
         try {
-            await TaskRepository.save({
+            const { id } = await TaskRepository.save({
                 title,
                 subtitle,
                 description,
@@ -58,7 +58,7 @@ export default class TaskController {
                 userId,
             });
 
-            res.sendStatus(202);
+            res.status(202).json({ id });
         } catch (err) {
             console.error(err);
 

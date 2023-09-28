@@ -9,7 +9,7 @@
     "scripts": {
         "dev": "nodemon",
         "ts-node": "yarn swagger-autogen ; ts-node -r tsconfig-paths/register --transpileOnly ./src/index.ts",
-        "start": "yarn swagger-autogen ; yarn pre:start ; node dist/index.js",
+        "start": "yarn pre:start ; node dist/index.js",
         "pre:start": "babel src --extensions \".js,.ts\" --ignore \"src/types/*.d.ts\" --out-dir dist --copy-files",
         "swagger-autogen": "ts-node ./src/config/swagger.ts"
     },

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export default (req: Request, res: Response, next: NextFunction) => {
     const { authorization, api_key } = req.headers;
-
+    
     try {
         // Routes free from the authorization
         if (req.path.match(/docs/g)?.length) {
@@ -18,7 +18,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
             jwt.verify(authorization, process?.env?.JWT_SECRET as string);
             jwt.verify(api_key as string, process?.env?.JWT_SECRET as string);
         }
-
         return next();
     } catch (err) {
         return res.status(401).send("Unauthorized");
